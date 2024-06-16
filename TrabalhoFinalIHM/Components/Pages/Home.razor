@@ -1,0 +1,82 @@
+﻿@page "/"
+
+@using TrabalhoFinalIHM.Components.Componentes
+@using TrabalhoFinalIHM.Models;
+@using TrabalhoFinalIHM.Models.InformacaoesPaginas
+
+@inject NavigationManager NavManager
+
+<MudContainer MaxWidth="MaxWidth.Large" Class="mt-5">
+
+    <MudGrid Class="mt-5">
+
+        <MudItem xs="12" sm="12" md="12" lg="12" xl="12" xxl="12">
+
+            <MudText
+                Typo="Typo.h4"
+                Align="Align.Center"
+                Style="font-weight: bold; margin-bottom: 100px;">
+                Envelhecimento da População
+            </MudText>
+
+        </MudItem>
+
+        <MudItem xs="12" sm="12" md="6" lg="6" xl="6" xxl="6">
+
+            <MudText
+                Align="Align.Left"
+                Typo="Typo.h2"
+                Style="font-weight: bold; color: black;">
+                Envelhecer é um privilégio, mas garantir qualidade de vida é um desafio crescente!
+            </MudText>
+
+            <MudButton
+                Size="Size.Small"
+                Style="background-color: black; color: white; margin-top: 80px;"
+                OnClick="@(() => IrParaInformacoes(InformacaoPagina.Privilegio))">
+                Saiba Mais
+            </MudButton>
+
+        </MudItem>
+
+        <MudItem xs="12" sm="12" md="6" lg="6" xl="6" xxl="6" Class="d-flex justify-center">
+
+            <MudHidden
+                Breakpoint="Breakpoint.SmAndDown"
+                Invert="true">
+
+                <MudImage Src="imagens/envelhecimento.jpg" Width="300" Height="300" />
+
+            </MudHidden>
+
+            <MudHidden
+                Breakpoint="Breakpoint.MdAndUp"
+                Invert="true">
+
+                <MudImage Src="imagens/envelhecimento.jpg" Width="500" Height="500" />
+
+            </MudHidden>
+
+        </MudItem>
+
+        <BotaoProximo IrProximaPagina="@IrParaSobre" />
+
+    </MudGrid>
+
+</MudContainer>
+
+@code {
+    private bool ExibirTexto = true;
+
+    private void IrParaInformacoes(List<Informacao> informacoes)
+    {
+        PaginaInformacoes.Titulo = "É preciso estar pronto para envelhecer";
+        PaginaInformacoes.Informacao = informacoes;
+        NavManager.NavigateTo("informacoes-pagina");
+    }
+
+    private void IrParaSobre()
+    {
+        NavManager.NavigateTo("/informacoes");
+    }
+}

@@ -1,0 +1,140 @@
+﻿@page "/informacoes"
+
+@using TrabalhoFinalIHM.Components.Componentes;
+
+@inject NavigationManager NavManager
+
+<MudContainer MaxWidth="MaxWidth.Large">
+    <MudGrid>
+
+        <MudItem xs="12" sm="12" md="12" lg="12" xl="12" xxl="12">
+
+            <MudText 
+                Align="Align.Center"
+                Typo="Typo.h4"
+                Style="color: black; font-weight: bold;">
+                Dados Estatísticos
+            </MudText>
+
+        </MudItem>
+
+        <MudItem xs="12" sm="12" md="12" lg="12" xl="12" xxl="12" Style="margin-top: 50px;">
+
+            <MudGrid>
+
+                <MudItem xs="12" sm="12" md="12" lg="12" xl="12" xxl="12">
+
+                    <MudText 
+                        Align="Align.Left"
+                        Typo="Typo.h6">
+                        Envelhecimento Global
+                    </MudText>
+
+                    <MudText 
+                        Align="Align.Left"
+                        Typo="Typo.subtitle1">
+                        O gráfico abaixo mostra a projeção do aumento da população idosa ao longo dos anos.
+                    </MudText>
+
+                </MudItem>
+
+                <MudItem xs="12" sm="12" md="12" lg="12" xl="12" xxl="12" Class="d-flex justify-center">
+
+                    <MudPaper 
+                        Elevation="0"
+                        Width="70%"
+                        Height="70%">
+
+                        <MudChart 
+                            ChartType="ChartType.Line"
+                            ChartSeries="@DadosAumentoEnvelhecimento"
+                            XAxisLabels="@LabelsAumentoEnvelhecimento"
+                            ChartOptions="@Options"
+                            Width="100%"
+                            Height="100%" />
+
+                    </MudPaper>
+
+                </MudItem>
+
+            </MudGrid>
+
+        </MudItem>
+
+        <MudItem xs="12" sm="12" md="12" lg="12" xl="12" xxl="12" Style="margin-top: 50px;">
+
+            <MudGrid>
+
+                <MudItem xs="12" sm="12" md="12" lg="12" xl="12" xxl="12">
+
+                    <MudText 
+                        Align="Align.Left"
+                        Typo="Typo.h6">
+                        Envelhecimento Global
+                    </MudText>
+
+                    <MudText 
+                        Align="Align.Left"
+                        Typo="Typo.subtitle1">
+                        O gráfico abaixo mostra a projeção do aumento da população idosa ao longo dos anos.
+                    </MudText>
+
+                </MudItem>
+
+                <MudItem xs="12" sm="12" md="12" lg="12" xl="12" xxl="12" Class="d-flex justify-center">
+
+                    <MudPaper 
+                        Elevation="0"
+                        Width="70%"
+                        Height="70%">
+
+                        <MudChart 
+                            ChartType="ChartType.Bar"
+                            ChartSeries="@DadosDistribuicaoPorIdade"
+                            XAxisLabels="@LabelsDistriubuicaoPorIdade"
+                            ChartOptions="@OpcoesGraficoBarra"
+                            Width="100%"
+                            Height="100%" />
+
+                    </MudPaper>
+                
+                </MudItem>
+
+            </MudGrid>
+
+        </MudItem>
+
+    </MudGrid>
+
+    <BotaoVoltar VoltarPagina="@VoltarPagina" />
+
+    <footer class="row">
+    <p class="col text-center text-muted">© 2024 Envelhecimento da População</p>
+    </footer>
+
+</MudContainer>
+
+@code {
+    public ChartOptions Options = new ChartOptions();
+    public ChartOptions OpcoesGraficoBarra = new()
+    {
+        ChartPalette = ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40"]
+    };
+
+    public List<ChartSeries> DadosAumentoEnvelhecimento = new List<ChartSeries>()
+    {
+        new ChartSeries() { Name = "Renewable", Data = new double[] { 11, 13, 14, 16, 17.5, 19, 21 } },
+    };
+    public string[] LabelsAumentoEnvelhecimento = { "2020", "2025", "2030", "2035", "2040", "2045", "2050" };
+
+    public List<ChartSeries> DadosDistribuicaoPorIdade = new List<ChartSeries>()
+    {
+        new ChartSeries() { Name = "Renewable", Data = new double[] { 4.9, 3.8, 2.8, 1.9, 1.1, 0.6 } },
+    };
+    public string[] LabelsDistriubuicaoPorIdade = { "60-64 anos", "65-69 anos", "70-74 anos", "75-79 anos", "80-84 anos", "85+ anos" };
+
+    private void VoltarPagina()
+    {
+        NavManager.NavigateTo("/");
+    }
+}

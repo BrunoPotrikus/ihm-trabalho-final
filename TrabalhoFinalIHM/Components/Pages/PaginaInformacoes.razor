@@ -1,0 +1,77 @@
+﻿@page "/informacoes-pagina"
+
+@using TrabalhoFinalIHM.Components.Componentes
+@using TrabalhoFinalIHM.Models.InformacaoesPaginas
+
+@inject NavigationManager NavManager
+
+<MudContainer MaxWidth="MaxWidth.Medium">
+
+    <MudGrid>
+
+        <MudItem xs="12" sm="12" md="12" lg="12" xl="12" xxl="12">
+
+            <MudText
+                Align="Align.Center"
+                Typo="Typo.h6"
+                Style="color: black; font-weight: bold;">
+                @Titulo
+            </MudText>
+
+        </MudItem>
+
+        <MudHidden
+            Breakpoint="Breakpoint.MdAndUp"
+            Invert="true">
+
+            @foreach (var informacao in Informacao)
+            {
+                <MudItem xs="12" sm="12" md="12" lg="12" xl="12" xxl="12">
+                    @informacao.Info
+                </MudItem>
+
+                <MudItem xs="12" sm="12" md="12" lg="12" xl="12" xxl="12" Class="d-flex justify-center">
+                    <MudImage Src="@informacao.Imagem" Width="800" Height="500" />
+                </MudItem>
+            }
+
+        </MudHidden>
+
+        <MudHidden
+            Breakpoint="Breakpoint.SmAndDown"
+            Invert="true">
+
+            @foreach (var informacao in Informacao)
+            {
+                <MudItem xs="12" sm="12" md="12" lg="12" xl="12" xxl="12">
+                    @informacao.Info
+                </MudItem>
+
+                <MudItem xs="12" sm="12" md="12" lg="12" xl="12" xxl="12" Class="d-flex justify-center">
+                    <MudImage Src="@informacao.Imagem" Width="300" Height="200"/>
+                </MudItem>
+            }
+
+        </MudHidden>
+
+
+    </MudGrid>
+
+    <BotaoVoltar VoltarPagina="@VoltarPagina" />
+
+</MudContainer>
+
+@code {
+    public static string? Titulo { get; set; }
+    public static List<Informacao>? Informacao { get; set; }
+
+    private void IrParaSobre()
+    {
+        NavManager.NavigateTo("/sobre");
+    }
+
+    private void VoltarPagina()
+    {
+        NavManager.NavigateTo("/");
+    }
+}

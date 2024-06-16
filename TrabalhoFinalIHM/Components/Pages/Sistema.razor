@@ -1,0 +1,32 @@
+﻿@page "/sistema"
+
+@using TrabalhoFinalIHM.Components.Componentes
+
+@inject NavigationManager NavManager
+
+<MudContainer>
+
+   <MudGrid>
+
+       <MudItem xs="12" sm="12" md="12" lg="12" xl="12" xxl="12">
+
+           <MudText 
+                Align="Align.Center"
+                Typo="Typo.h4">
+                Bem Vindo!
+            </MudText>
+
+       </MudItem>
+
+   </MudGrid>
+
+   <BotaoVoltar VoltarPagina="@VoltarPagina" />
+
+</MudContainer>
+
+@code {
+    private void VoltarPagina()
+    {
+        NavManager.NavigateTo("/");
+    }
+}

@@ -1,0 +1,167 @@
+﻿@inherits LayoutComponentBase
+
+@inject NavigationManager NavManager
+
+<MudThemeProvider Theme="@Tema"/>
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudHidden Breakpoint="Breakpoint.MdAndDown" Invert="false">
+
+    <MudNavMenu Style="background-color: ghostwhite; padding: 2px; position: fixed; width: 100%" Class="d-flex">
+
+        <MudImage Src="imagens/envelhecimento.jpg" Width="70" Height="70"/>
+
+        <MudSpacer />
+
+        <MudList Class="d-flex justify-center">
+
+            <MudListItem>
+                <MudButton 
+                    StartIcon="@Icons.Material.Filled.Home" 
+                    Style="background-color: ghostwhite; color: dodgerblue;"
+                    OnClick="@(() => NavManager.NavigateTo("/"))">
+                    Home
+                </MudButton>
+            </MudListItem>
+
+            <MudListItem>
+                <MudButton 
+                    StartIcon="@Icons.Material.Filled.InsertChartOutlined" 
+                    Style="background-color: ghostwhite; color: dodgerblue;"
+                    OnClick="@(() => NavManager.NavigateTo("/informacoes"))">
+                    Informações
+                </MudButton>
+            </MudListItem>
+
+        </MudList>
+
+        <MudSpacer />
+
+        <MudButton 
+            StartIcon="@Icons.Material.Filled.Login" 
+            Style="background-color: dodgerblue; color: white; width: 120px; height: 40px; margin-top: 18px; margin-left: 10px;" 
+            Size="Size.Small"
+            OnClick="@(() => NavManager.NavigateTo("/login"))">
+            Login
+        </MudButton>
+
+    </MudNavMenu>
+
+</MudHidden>
+
+<MudHidden Breakpoint="Breakpoint.LgAndUp" Invert="false">
+
+    <MudNavMenu Style="background-color: ghostwhite; padding: 2px; position: fixed; width: 100%">
+
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" OnClick="@AbrirFecharMenu"/>
+
+    </MudNavMenu>
+
+    <MudDrawer 
+        @bind-Open="@MenuAberto"
+        Variant="@DrawerVariant.Temporary"
+        Style="position: fixed;">
+
+        <MudDrawerHeader>
+
+            <MudImage Src="imagens/envelhecimento.jpg" Width="70" Height="70" />
+
+        </MudDrawerHeader>
+
+        <MudList>
+
+            <MudListItem>
+
+                <MudButton 
+                    StartIcon="@Icons.Material.Filled.Home" 
+                    Style="background-color: white; color: dodgerblue;"
+                    OnClick="@(() => NavegarMenu("/"))">
+                    Home
+                </MudButton>
+
+            </MudListItem>
+
+            <MudListItem>
+
+                <MudButton 
+                    StartIcon="@Icons.Material.Filled.InsertChartOutlined" 
+                    Style="background-color: gwhite; color: dodgerblue;"
+                    OnClick="@(() => NavegarMenu("/informacoes"))">
+                    Informações
+                </MudButton>
+
+            </MudListItem>
+
+            <MudListItem>
+
+                 <MudButton 
+                    StartIcon="@Icons.Material.Filled.Login" 
+                    Style="background-color: dodgerblue; color: white; width: 120px; height: 40px; margin-top: 18px; margin-left: 10px;" 
+                    Size="Size.Small"
+                    Class="mt-5"
+                    OnClick="@(() => NavegarMenu("/login"))">
+                    Login
+                </MudButton>
+
+            </MudListItem>
+
+        </MudList>
+
+        @* <MudGrid>
+
+            <MudItem xs="12" sm="12" md="12" lg="12" xl="12" xxl="12">
+
+                <MudImage Src="imagens/envelhecimento.jpg" Width="70" Height="70" />
+
+            </MudItem>
+
+            <MudDivider />
+
+            <MudItem xs="12" sm="12" md="12" lg="12" xl="12" xxl="12">
+
+                <MudButton 
+                    StartIcon="@Icons.Material.Filled.Home" 
+                    Style="background-color: ghostwhite; color: dodgerblue;"
+                    OnClick="@(() => NavManager.NavigateTo("/"))">
+                    Home
+                </MudButton>
+
+            </MudItem>
+
+        </MudGrid> *@
+
+    </MudDrawer>
+
+</MudHidden>
+
+<MudMainContent>
+
+    <MudGrid Class="mt-10"/>
+
+    @Body
+
+</MudMainContent>
+
+@code{
+    private MudTheme Tema = new()
+    {
+        Palette = new()
+        {
+            Primary = "#1e90ff"
+        }
+    };
+
+    private bool MenuAberto = false;
+
+    private void AbrirFecharMenu()
+    {
+        MenuAberto = !MenuAberto;
+    }
+
+    private void NavegarMenu(string url)
+    {
+        NavManager.NavigateTo(url);
+        AbrirFecharMenu();
+    }
+}
